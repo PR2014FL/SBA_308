@@ -1,102 +1,159 @@
 // The provided course information.
 const CourseInfo = {
-    id: 451,
-    name: "Introduction to JavaScript"
-  };
-  
-  // The provided assignment group.
-  const AssignmentGroup = {
-    id: 12345,
-    name: "Fundamentals of JavaScript",
-    course_id: 451,
-    group_weight: 25,
-    assignments: [
-      {
-        id: 1,
-        name: "Declare a Variable",
-        due_at: "2023-01-25",
-        points_possible: 50
-      },
-      {
-        id: 2,
-        name: "Write a Function",
-        due_at: "2023-02-27",
-        points_possible: 150
-      },
-      {
-        id: 3,
-        name: "Code the World",
-        due_at: "3156-11-15",
-        points_possible: 500
-      }
-    ]
-  };
-  
-  // The provided learner submission data.
-  const LearnerSubmissions = [
+  id: 451,
+  name: "Introduction to JavaScript",
+};
+
+// The provided assignment group.
+const AssignmentGroup = {
+  id: 12345,
+  name: "Fundamentals of JavaScript",
+  course_id: 451,
+  group_weight: 25,
+  assignments: [
     {
-      learner_id: 125,
-      assignment_id: 1,
-      submission: {
-        submitted_at: "2023-01-25",
-        score: 47
-      }
+      id: 1,
+      name: "Declare a Variable",
+      due_at: "2023-01-25",
+      points_possible: 50,
     },
     {
-      learner_id: 125,
-      assignment_id: 2,
-      submission: {
-        submitted_at: "2023-02-12",
-        score: 150
-      }
+      id: 2,
+      name: "Write a Function",
+      due_at: "2023-02-27",
+      points_possible: 150,
     },
     {
-      learner_id: 125,
-      assignment_id: 3,
-      submission: {
-        submitted_at: "2023-01-25",
-        score: 400
-      }
+      id: 3,
+      name: "Code the World",
+      due_at: "3156-11-15",
+      points_possible: 500,
     },
-    {
-      learner_id: 132,
-      assignment_id: 1,
-      submission: {
-        submitted_at: "2023-01-24",
-        score: 39
-      }
+  ],
+};
+
+// The provided learner submission data.
+const LearnerSubmissions = [
+  {
+    learner_id: 125,
+    assignment_id: 1,
+    submission: {
+      submitted_at: "2023-01-25",
+      score: 47,
     },
-    {
-      learner_id: 132,
-      assignment_id: 2,
-      submission: {
-        submitted_at: "2023-03-07",
-        score: 140
-      }
+  },
+  {
+    learner_id: 125,
+    assignment_id: 2,
+    submission: {
+      submitted_at: "2023-02-12",
+      score: 150,
+    },
+  },
+  {
+    learner_id: 125,
+    assignment_id: 3,
+    submission: {
+      submitted_at: "2023-01-25",
+      score: 400,
+    },
+  },
+  {
+    learner_id: 132,
+    assignment_id: 1,
+    submission: {
+      submitted_at: "2023-01-24",
+      score: 39,
+    },
+  },
+  {
+    learner_id: 132,
+    assignment_id: 2,
+    submission: {
+      submitted_at: "2023-03-07", //submitted this one late
+      score: 140,
+    },
+  },
+];
+
+function getLearnerData(course, ag, submission) {
+  //BEGINNING OF FUNCTION
+  //Calculating Total points of all assignments
+  let sumOfTotals = 0;
+  for (let i = 0; i < ag.assignments.length; i++) {
+    if (ag.assignments[i].due_at !== "3156-11-15") {
+      let eachTotal = ag.assignments[i].points_possible;
+      console.log(`Assignment ${i + 1} is:`, eachTotal); //Test log
+      sumOfTotals += eachTotal;
     }
-  ];
-  
-  function getLearnerData(course, ag, submissions) {
-    // here, we would process this data to achieve the desired result.
-    const result = [
-      {
-        id: 125,
-        avg: 0.985, // (47 + 150) / (50 + 150)
-        1: 0.94, // 47 / 50
-        2: 1.0 // 150 / 150
-      },
-      {
-        id: 132,
-        avg: 0.82, // (39 + 125) / (50 + 150)
-        1: 0.78, // 39 / 50
-        2: 0.833 // late: (140 - 15) / 150
-      }
-    ];
-  
-    return result;
   }
-  
-  const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
-  
-  console.log(result);
-  
+
+
+//   console.log(`Total of all valid Assignments is: sumOfTotals`, sumOfTotals); //Test log
+  // //Student ID numbers
+  const firstStudentId = submission[0].learner_id;
+//   console.log(`First Student is: firstStudentId `, firstStudentId); //Test log
+  const lastStudentId = submission[submission.length - 1].learner_id;
+//   console.log(`Last Student is: lastStudentId`, lastStudentId); //Test  log
+
+//   // //Calculating totals of each student
+let student125Totals;
+let student132Totals;
+let sumOfTotalsID125;
+let sumOfTotalsID132;
+
+// if (firstStudentId) {
+    for (let i = 0; i < submission.length; i++) {
+let hwTotal = submission.submission[i].score;
+    sumOfTotalsID125 += hwTotal;}
+// } 
+// else if (lastStudentId) {
+//     for (let i = 0; i < submission.length; i++) {
+//     let hwTotal = submission.submission[i].score;
+//     sumOfTotalsID132 =+ hwTotal;}
+// }
+console.log(`Id 125's total: `, sumOfTotalsID125, `Id 132's total: `, sumOfTotalsID132);
+
+//   // //Course info
+//   const courseId = course.id || ag.course_id;
+
+  // //Calculating scores of all assignments
+ 
+//   let sumOfScores1and2 = sumOfScoreAssign1 + sumOfScoreAssign2
+//   let assignment1;
+//   let assignment2;
+//   for (const a of submission) {
+//     if (a.assignment_id === 1) {
+//       assignment1 = a.assignment_id;
+//     } else if (a.assignment_id === 2) {
+//       assignment2 = a.assignment_id;
+//       break;
+//     }
+//   }
+//   console.log(
+//     `Assignment1 is ${assignment1} and Assignment2 is ${assignment2}`
+//   ); //Test log
+
+
+//   const assignment1Due = ag.assignments[0].due_at;
+//   const assignment2Due = ag.assignments[1].due_at;
+//   for (let i = 0; i < submission.length; i++) {}
+
+//   let learnerArray =[]; //answer goes in here
+//   if( )
+//    learnerArray =  [
+//     {
+//         id: firstStudentId,
+//         avg: sumOfScores1and2 / sumOfTotals,
+//         1: sumOfScoreAssign1 / ag.assignments[0].points_possible,
+//         2: sumOfScoreAssign2 /  ag.assignments[1].points_possible,
+//     }
+//   ]
+//   return learnerArray;
+} //END OF FUNCTION!
+
+const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
+
+// console.log(result);
+// 
+// 
